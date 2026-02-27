@@ -1,0 +1,32 @@
+title: staging-udharpay-admin-lb — Complete LB Audit
+
+order: Listeners, Rules, Target_Groups, Targets
+
+note Listeners: **Listeners (2)**
+note Rules: **Rules (2)** — 1 Default on HTTPS:443 + 1 Default on HTTP:80
+note Target_Groups: **Target Groups (1)**
+note Targets: **Targets (1)** — EC2 Instance `i-0e9bad65a2d297b40`
+
+=: **Listener: HTTPS:443** — 1 rule (default only)
+
+Listeners -> Rules: **HTTPS:443** (1 rule)
+
+-: Default (HTTPS:443)
+
+Rules -> Target_Groups: **Default** → Forward\nAll traffic → `staging-udharpay-admin-tg`
+Target_Groups -> Targets: **staging-udharpay-admin-tg**\nHTTP, Port 80\nHealthCheck: `/health`
+note Targets: `i-0e9bad65a2d297b40` Port 80\n{fas-check-circle} **Healthy**
+
+=: **Listener: HTTP:80** — 1 rule (redirect only)
+
+Listeners -> Rules: **HTTP:80** (1 rule)
+
+-: Default (HTTP:80)
+
+Rules --> Listeners: **Default** → 301 Redirect to HTTPS:443\nPreserves host, path, query
+
+=: **Health Summary**
+
+note Listeners, Targets:
+**1 Healthy** {fas-check-circle}:
+staging-udharpay-admin-tg

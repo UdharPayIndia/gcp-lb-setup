@@ -1,0 +1,30 @@
+{
+    "Rules": [
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/staging-udharpay-admin-lb/9e1e586d8540ed85/fbea4c5388440633/5fe1fe28535da11a",
+            "Priority": "default",
+            "Conditions": [],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-admin-tg/bf13dd5cb4ff49fc",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-admin-tg/bf13dd5cb4ff49fc",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": true,
+            "Transforms": []
+        }
+    ]
+}

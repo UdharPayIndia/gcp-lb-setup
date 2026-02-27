@@ -172,3 +172,10 @@ services:
     ports:
       - "8105:80"  # Reassigned from 8085 (conflict with dlt)
     restart: always
+
+  udharpay-admin:
+    image: traefik/whoami
+    hostname: udharpay-admin
+    ports:
+      - "8095:80"  # Reassigned from 80 (staging-udharpay-admin-lb, dedicated EC2 in AWS)
+    restart: always
