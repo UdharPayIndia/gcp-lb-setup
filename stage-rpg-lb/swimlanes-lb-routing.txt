@@ -1,0 +1,52 @@
+title: stage-rpg-lb — Complete LB Audit
+
+order: Listeners, Rules, Target_Groups, Targets
+
+note Listeners: **Listeners (1)**
+note Rules: **Rules (6)** — 5 on HTTPS:443 + 1 Default
+note Target_Groups: **Target Groups (5)**
+note Targets: **Targets (1)** — EC2 Instance `i-09b0d684727c7e116`
+
+=: **Listener: HTTPS:443** — 6 rules
+
+Listeners -> Rules: **HTTPS:443** (6 rules)
+
+-: Priority 2
+
+Rules -> Target_Groups: **P2** → Forward\nPath: `/payment-account/*`
+Target_Groups -> Targets: **stage-pg-payment-account**\nHTTP, Port 80\nHealthCheck: `/`
+note Targets: `i-09b0d684727c7e116` Port 8081\n{fas-check-circle} **Healthy**
+
+-: Priority 3
+
+Rules -> Target_Groups: **P3** → Forward\nPath: `/payment-order/*`
+Target_Groups -> Targets: **stage-pg-payment-order**\nHTTP, Port 80\nHealthCheck: `/`
+note Targets: `i-09b0d684727c7e116` Port 8083\n{fas-check-circle} **Healthy**
+
+-: Priority 4
+
+Rules -> Target_Groups: **P4** → Forward\nPath: `/payment-gateway/*`
+Target_Groups -> Targets: **stage-pg-payment-gateway**\nHTTP, Port 80\nHealthCheck: `/`
+note Targets: `i-09b0d684727c7e116` Port 8084\n{fas-check-circle} **Healthy**
+
+-: Priority 5
+
+Rules -> Target_Groups: **P5** → Forward\nPath: `/payment-mandate/*`
+Target_Groups -> Targets: **stage-pg-payment-mandate**\nHTTP, Port 80\nHealthCheck: `/`
+note Targets: `i-09b0d684727c7e116` Port 8086\n{fas-check-circle} **Healthy**
+
+-: Priority 7
+
+Rules -> Target_Groups: **P7** → Forward\nPath: `/payment-instrument/*`
+Target_Groups -> Targets: **stage-pg-payment-instrument**\nHTTP, Port 80\nHealthCheck: `/`
+note Targets: `i-09b0d684727c7e116` Port 8085\n{fas-check-circle} **Healthy**
+
+-: Default (HTTPS:443)
+
+Rules -x Target_Groups: **Default** → Fixed Response
+
+=: **Health Summary**
+
+note Listeners, Targets:
+**5 Healthy** {fas-check-circle}:
+stage-pg-payment-account, stage-pg-payment-order, stage-pg-payment-gateway, stage-pg-payment-mandate, stage-pg-payment-instrument

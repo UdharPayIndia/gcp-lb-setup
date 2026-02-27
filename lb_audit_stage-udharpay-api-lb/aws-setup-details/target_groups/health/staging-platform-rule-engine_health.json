@@ -1,0 +1,21 @@
+{
+    "TargetHealthDescriptions": [
+        {
+            "Target": {
+                "Id": "i-0973b4cfa3cad5f21",
+                "Port": 8081
+            },
+            "HealthCheckPort": "8081",
+            "TargetHealth": {
+                "State": "unhealthy",
+                "Reason": "Target.ResponseCodeMismatch",
+                "Description": "Health checks failed with these codes: [404]"
+            },
+            "AdministrativeOverride": {
+                "State": "no_override",
+                "Reason": "AdministrativeOverride.NoOverride",
+                "Description": "No override is currently active on target"
+            }
+        }
+    ]
+}

@@ -1,0 +1,1226 @@
+{
+    "Rules": [
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/4ca3ec3707790d60",
+            "Priority": "1",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/support-service/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/support-service/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-support-service/6482553d52f070fb",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-support-service/6482553d52f070fb",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/b10e272243afc161",
+            "Priority": "2",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/account/v2/authenticate"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/account/v2/authenticate"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-users-and-verifications-tg/9cf1a257fda581cd",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-users-and-verifications-tg/9cf1a257fda581cd",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/14895a8d2936a425",
+            "Priority": "3",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/account/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/account/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-account-preference/f104ebfefd6f7d7b",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-account-preference/f104ebfefd6f7d7b",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/17bc42d09baa06c3",
+            "Priority": "4",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/account-preference/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/account-preference/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-account-preference/f104ebfefd6f7d7b",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-account-preference/f104ebfefd6f7d7b",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/557cfe03abed0da3",
+            "Priority": "5",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/payments-and-billing/*",
+                        "/ab-experiment/*",
+                        "/ab-rollout/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/payments-and-billing/*",
+                            "/ab-experiment/*",
+                            "/ab-rollout/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/d877848182e84dea",
+            "Priority": "6",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/common/wallets/*",
+                        "/common/product-orders/*",
+                        "/common/payment-orders/*",
+                        "/common/party/*",
+                        "/common/preferences/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/common/wallets/*",
+                            "/common/product-orders/*",
+                            "/common/payment-orders/*",
+                            "/common/party/*",
+                            "/common/preferences/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/eda4e7d668271fd9",
+            "Priority": "7",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/v1/merchant/kyc*",
+                        "/v1/merchant/workflow*",
+                        "/api/merchant/bank_details*",
+                        "/api/banks*",
+                        "/api/instruments*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/v1/merchant/kyc*",
+                            "/v1/merchant/workflow*",
+                            "/api/merchant/bank_details*",
+                            "/api/banks*",
+                            "/api/instruments*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/94bb5ee5d08de11f",
+            "Priority": "8",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/api/mas/*",
+                        "/api/merchant/auth/v2/*",
+                        "/api/system-status",
+                        "/api/merchant/devices*",
+                        "/api/merchant/admin/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/api/mas/*",
+                            "/api/merchant/auth/v2/*",
+                            "/api/system-status",
+                            "/api/merchant/devices*",
+                            "/api/merchant/admin/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/b7382bf2a9e2a5d5",
+            "Priority": "9",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/api/help",
+                        "/v1/merchant/*",
+                        "/api/merchant/user-query*",
+                        "/api/merchant/auth*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/api/help",
+                            "/v1/merchant/*",
+                            "/api/merchant/user-query*",
+                            "/api/merchant/auth*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/0f6dcd4e09843ea0",
+            "Priority": "10",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/api/merchant/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/api/merchant/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/4e2e7cd8c75367c7",
+            "Priority": "11",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/superkey/*",
+                        "/rocketscore/*",
+                        "/super-key/*",
+                        "/credit-score/*",
+                        "/referrals/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/superkey/*",
+                            "/rocketscore/*",
+                            "/super-key/*",
+                            "/credit-score/*",
+                            "/referrals/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-superkey-tg/7a9e14727cb7537a",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-superkey-tg/7a9e14727cb7537a",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/87a6b23d369b142f",
+            "Priority": "12",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/verification/*",
+                        "/auth/*",
+                        "/analytics/*",
+                        "/auth-migration/*",
+                        "/acl/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/verification/*",
+                            "/auth/*",
+                            "/analytics/*",
+                            "/auth-migration/*",
+                            "/acl/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-users-and-verifications-tg/9cf1a257fda581cd",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-users-and-verifications-tg/9cf1a257fda581cd",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/bd274657bfa87720",
+            "Priority": "13",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/dlt/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/dlt/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-dlt-stage/b4de9b4cc11f0943",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-dlt-stage/b4de9b4cc11f0943",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/c629ddf39ba08011",
+            "Priority": "14",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/v2/merchant/*",
+                        "/api/*",
+                        "/common/mappings/*",
+                        "/v1/customer/*",
+                        "/v3/merchant/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/v2/merchant/*",
+                            "/api/*",
+                            "/common/mappings/*",
+                            "/v1/customer/*",
+                            "/v3/merchant/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/f82b4f543a241ee0",
+            "Priority": "15",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/v4/mandates*",
+                        "/v4/installments*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/v4/mandates*",
+                            "/v4/installments*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-udharpay-api-tg/9bf177cf7612a9ed",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/fa534df314206588",
+            "Priority": "18",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/rule/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/rule/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-rule-engine/9e9c5bc4d0b4a007",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-rule-engine/9e9c5bc4d0b4a007",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/cd7ee9146e61eae8",
+            "Priority": "19",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/charge-service/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/charge-service/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-charge-service/f6d60d6db3e05faf",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-charge-service/f6d60d6db3e05faf",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/fedc206be525554d",
+            "Priority": "21",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/party/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/party/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-party-service/3bb6c32a1d97f14b",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-platform-party-service/3bb6c32a1d97f14b",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/d1f0ae21d4cb4e5f",
+            "Priority": "22",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/kyc/*",
+                        "/workflow/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/kyc/*",
+                            "/workflow/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-kyc-tg/b61a003f45af9eac",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-kyc-tg/b61a003f45af9eac",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/6321c51f27add4a2",
+            "Priority": "24",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/key/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/key/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-key-tg/ea0709c18f2d3648",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-key-tg/ea0709c18f2d3648",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/0b82f3b0ea6666a5",
+            "Priority": "25",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/key-gateway/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/key-gateway/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-key-gateway-tg/7f5306de9fc6a2a2",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-key-gateway-tg/7f5306de9fc6a2a2",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/661c0f689c9dd2a3",
+            "Priority": "26",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/cus/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/cus/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/dbbe583dfe273731",
+            "Priority": "27",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/book/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/book/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-platform-common-tg/e361beef7e097934",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-platform-common-tg/e361beef7e097934",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/aec7deee54fafc38",
+            "Priority": "28",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/product-order/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/product-order/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-product-order-tg/cd7c53982d846083",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-product-order-tg/cd7c53982d846083",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/854f731b3a854c24",
+            "Priority": "30",
+            "Conditions": [
+                {
+                    "Field": "host-header",
+                    "Values": [
+                        "staging-distributor.rocketpay.co.in"
+                    ],
+                    "HostHeaderConfig": {
+                        "Values": [
+                            "staging-distributor.rocketpay.co.in"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-distributor-app/97db0d91cabe55b0",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-distributor-app/97db0d91cabe55b0",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/be7be0b32bacecf2",
+            "Priority": "33",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/lending/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/lending/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-lending/00fcc9ace2c82d9d",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-lending/00fcc9ace2c82d9d",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/9257aa49fe03addb",
+            "Priority": "34",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/crm/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/crm/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-crm-tg/0d287c3533b59ef8",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-crm-tg/0d287c3533b59ef8",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/848993bb4f90f9ed",
+            "Priority": "35",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/agreement/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/agreement/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/c65bb77da511c9ca",
+            "Priority": "36",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/support-agent/*",
+                        "/analytics-agent/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/support-agent/*",
+                            "/analytics-agent/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-ai-apps/2503af90456442f0",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/staging-ai-apps/2503af90456442f0",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/9d7858f310a6f762",
+            "Priority": "37",
+            "Conditions": [
+                {
+                    "Field": "path-pattern",
+                    "Values": [
+                        "/common/charges/*"
+                    ],
+                    "PathPatternConfig": {
+                        "Values": [
+                            "/common/charges/*"
+                        ]
+                    }
+                }
+            ],
+            "Actions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                    "Order": 1,
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-payments-and-billing-tg/9e23d988c489dcc1",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false,
+                            "DurationSeconds": 3600
+                        }
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Transforms": []
+        },
+        {
+            "RuleArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:listener-rule/app/stage-udharpay-api-lb/c3501a97fac61181/ae7f3e5f367f4638/2bdf29cf45b7be6b",
+            "Priority": "default",
+            "Conditions": [],
+            "Actions": [
+                {
+                    "Type": "fixed-response",
+                    "Order": 1,
+                    "FixedResponseConfig": {
+                        "MessageBody": "Api is Not supported",
+                        "StatusCode": "503",
+                        "ContentType": "text/plain"
+                    }
+                }
+            ],
+            "IsDefault": true,
+            "Transforms": []
+        }
+    ]
+}

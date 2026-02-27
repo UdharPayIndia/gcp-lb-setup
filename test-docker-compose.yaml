@@ -1,0 +1,174 @@
+version: '3.8'
+
+# Dummy Services for E2E Networking Test
+# All services use 'traefik/whoami' which returns container info on any path.
+# hostname is set to the service name for easy verification via curl.
+
+services:
+  udharpay-api:
+    image: traefik/whoami
+    hostname: udharpay-api
+    ports:
+      - "8000:80"
+    restart: always
+
+  users-verifications:
+    image: traefik/whoami
+    hostname: users-verifications
+    ports:
+      - "8081:80"
+    restart: always
+
+  payments-billing:
+    image: traefik/whoami
+    hostname: payments-billing
+    ports:
+      - "8082:80"
+    restart: always
+
+  superkey:
+    image: traefik/whoami
+    hostname: superkey
+    ports:
+      - "8083:80"
+    restart: always
+
+  rule-engine:
+    image: traefik/whoami
+    hostname: rule-engine
+    ports:
+      - "8084:80"
+    restart: always
+
+  dlt:
+    image: traefik/whoami
+    hostname: dlt
+    ports:
+      - "8085:80"
+    restart: always
+
+  account-preference:
+    image: traefik/whoami
+    hostname: account-preference
+    ports:
+      - "8086:80"
+    restart: always
+
+  crm:
+    image: traefik/whoami
+    hostname: crm
+    ports:
+      - "8087:80"
+    restart: always
+
+  lending:
+    image: traefik/whoami
+    hostname: lending
+    ports:
+      - "8088:80"
+    restart: always
+
+  support-service:
+    image: traefik/whoami
+    hostname: support-service
+    ports:
+      - "8089:80"
+    restart: always
+
+  product-order:
+    image: traefik/whoami
+    hostname: product-order
+    ports:
+      - "8090:80"
+    restart: always
+
+  key-gateway:
+    image: traefik/whoami
+    hostname: key-gateway
+    ports:
+      - "8091:80"
+    restart: always
+
+  charge-service:
+    image: traefik/whoami
+    hostname: charge-service
+    ports:
+      - "8092:80"
+    restart: always
+
+  party-service:
+    image: traefik/whoami
+    hostname: party-service
+    ports:
+      - "8093:80"
+    restart: always
+
+  platform-common:
+    image: traefik/whoami
+    hostname: platform-common
+    ports:
+      - "8094:80"
+    restart: always
+
+  kyc:
+    image: traefik/whoami
+    hostname: kyc
+    ports:
+      - "8246:80"
+    restart: always
+
+  key:
+    image: traefik/whoami
+    hostname: key
+    ports:
+      - "8077:80"
+    restart: always
+
+  distributor-app:
+    image: traefik/whoami
+    hostname: distributor-app
+    ports:
+      - "3000:80"
+    restart: always
+
+  ai-apps:
+    image: traefik/whoami
+    hostname: ai-apps
+    ports:
+      - "3001:80"
+    restart: always
+
+  pg-payment-account:
+    image: traefik/whoami
+    hostname: pg-payment-account
+    ports:
+      - "8101:80"  # Reassigned from 8081 (conflict with users-verifications)
+    restart: always
+
+  pg-payment-order:
+    image: traefik/whoami
+    hostname: pg-payment-order
+    ports:
+      - "8102:80"  # Reassigned from 8083 (conflict with superkey)
+    restart: always
+
+  pg-payment-gateway:
+    image: traefik/whoami
+    hostname: pg-payment-gateway
+    ports:
+      - "8103:80"  # Reassigned from 8084 (conflict with rule-engine)
+    restart: always
+
+  pg-payment-mandate:
+    image: traefik/whoami
+    hostname: pg-payment-mandate
+    ports:
+      - "8104:80"  # Reassigned from 8086 (conflict with account-preference)
+    restart: always
+
+  pg-payment-instrument:
+    image: traefik/whoami
+    hostname: pg-payment-instrument
+    ports:
+      - "8105:80"  # Reassigned from 8085 (conflict with dlt)
+    restart: always

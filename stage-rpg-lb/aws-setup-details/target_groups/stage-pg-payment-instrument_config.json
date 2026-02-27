@@ -1,0 +1,28 @@
+{
+    "TargetGroups": [
+        {
+            "TargetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:718375710916:targetgroup/stage-pg-payment-instrument/fb69e237064ff466",
+            "TargetGroupName": "stage-pg-payment-instrument",
+            "Protocol": "HTTP",
+            "Port": 80,
+            "VpcId": "vpc-0521c10d07ff08c2b",
+            "HealthCheckProtocol": "HTTP",
+            "HealthCheckPort": "traffic-port",
+            "HealthCheckEnabled": true,
+            "HealthCheckIntervalSeconds": 30,
+            "HealthCheckTimeoutSeconds": 5,
+            "HealthyThresholdCount": 5,
+            "UnhealthyThresholdCount": 2,
+            "HealthCheckPath": "/payment-instrument/actuator/health",
+            "Matcher": {
+                "HttpCode": "200"
+            },
+            "LoadBalancerArns": [
+                "arn:aws:elasticloadbalancing:ap-south-1:718375710916:loadbalancer/app/stage-rpg-lb/d6d9cbf8e7b18533"
+            ],
+            "TargetType": "instance",
+            "ProtocolVersion": "HTTP1",
+            "IpAddressType": "ipv4"
+        }
+    ]
+}
