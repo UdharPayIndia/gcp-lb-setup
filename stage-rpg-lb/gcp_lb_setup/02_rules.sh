@@ -8,7 +8,7 @@ set -euo pipefail
 PROJECT_ID="${GCP_PROJECT_ID:?Set GCP_PROJECT_ID env var}"
 URL_MAP_NAME="stage-lb-as1-udharpay-api"
 PATH_MATCHER_NAME="pg-paths"
-NEW_HOST="gcp-staging-api-pg"
+NEW_HOST="stage-api-pg.rocketpay.co.in"
 DEFAULT_BUCKET="stage-bb-as1-default-503"
 
 echo "=== Patching URL Map: $URL_MAP_NAME ==="

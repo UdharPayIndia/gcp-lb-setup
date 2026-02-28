@@ -18,7 +18,7 @@ set -euo pipefail
 PROJECT_ID="${GCP_PROJECT_ID:?Set GCP_PROJECT_ID env var}"
 
 # Domain(s) for the SSL certificate
-SSL_DOMAINS="gcp-staging-api.rocketpay.co.in,gcp-staging-distributor.rocketpay.co.in"
+SSL_DOMAINS="api-staging.rocketpay.co.in,stage-api-pg.rocketpay.co.in,admin-staging.udharpay.com,staging-distributor.rocketpay.co.in"
 
 echo "=== Step 1: Reserve a Global Static IP ==="
 gcloud compute addresses create stage-lbip-as1-udharpay-api \

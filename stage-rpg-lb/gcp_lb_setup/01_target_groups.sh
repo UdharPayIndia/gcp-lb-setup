@@ -48,11 +48,11 @@ create_hc() {
 }
 
 # New health checks on unique ports
-create_hc "stage-hc-as1-pg-payment-account"     "/" 8101
-create_hc "stage-hc-as1-pg-payment-order"       "/" 8102
-create_hc "stage-hc-as1-pg-payment-gateway"     "/" 8103
-create_hc "stage-hc-as1-pg-payment-mandate"     "/" 8104
-create_hc "stage-hc-as1-pg-payment-instrument"  "/" 8105
+create_hc "stage-hc-as1-pg-payment-account"     "/payment-account/actuator/health" 8101
+create_hc "stage-hc-as1-pg-payment-order"       "/payment-order/actuator/health" 8102
+create_hc "stage-hc-as1-pg-payment-gateway"     "/payment-gateway/actuator/health" 8103
+create_hc "stage-hc-as1-pg-payment-mandate"     "/payment-mandate/actuator/health" 8104
+create_hc "stage-hc-as1-pg-payment-instrument"  "/payment-instrument/actuator/health" 8105
 
 echo "=== Step 3: Create Backend Services ==="
 create_bs() {

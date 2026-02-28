@@ -74,7 +74,7 @@ ai-apps:3001" \
 # create_hc "stage-hc-as1-udharpay-api"                "/"                               8000
 # create_hc "stage-hc-as1-superkey"                    "/superkey"                       8083
 # create_hc "stage-hc-as1-dlt"                         "/dlt/actuator/health"            8085
-# create_hc "stage-hc-as1-platform-rule-engine"        "/"                               8084
+# create_hc "stage-hc-as1-platform-rule-engine"        "/rule/actuator/health"           8084
 # create_hc "stage-hc-as1-platform-charge-service"     "/"                               8092
 # create_hc "stage-hc-as1-platform-party-service"      "/"                               8093
 # create_hc "stage-hc-as1-kyc"                         "/"                               8246

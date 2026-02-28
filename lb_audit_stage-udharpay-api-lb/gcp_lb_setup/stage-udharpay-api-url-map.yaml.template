@@ -12,7 +12,7 @@ hostRules:
   - '*'
   pathMatcher: main-paths
 - hosts:
-  - gcp-staging-distributor.rocketpay.co.in
+  - staging-distributor.rocketpay.co.in
   pathMatcher: distributor-paths
 
 pathMatchers:
