@@ -46,12 +46,14 @@ echo ""
 echo "=== 1/11: Forwarding Rules ==="
 del gcloud compute forwarding-rules delete stage-forwardingrule-as1-udharpay-api-https --global
 del gcloud compute forwarding-rules delete stage-forwardingrule-as1-udharpay-api-http --global
+del gcloud compute forwarding-rules delete stage-forwardingrule-as1-udharpay-api-http-no-ssl --global
 
 # ─── 2. Target Proxies ───────────────────────────────────────────────────────
 echo ""
 echo "=== 2/11: Target Proxies ==="
 del gcloud compute target-https-proxies delete stage-targetproxy-as1-udharpay-api-https --global
 del gcloud compute target-http-proxies delete stage-targetproxy-as1-udharpay-api-http --global
+del gcloud compute target-http-proxies delete stage-targetproxy-as1-udharpay-api-http-no-ssl --global
 
 # ─── 3. SSL Certificate ──────────────────────────────────────────────────────
 echo ""
@@ -68,6 +70,7 @@ del gcloud compute url-maps delete stage-lb-as1-udharpay-api-redirect --global
 echo ""
 echo "=== 5/11: Static IP ==="
 del gcloud compute addresses delete stage-lbip-as1-udharpay-api --global
+del gcloud compute addresses delete stage-lbip-as1-udharpay-api-no-ssl --global
 
 # ─── 6. Backend Services ─────────────────────────────────────────────────────
 echo ""

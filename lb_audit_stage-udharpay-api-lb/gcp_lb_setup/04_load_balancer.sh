@@ -17,9 +17,6 @@ set -euo pipefail
 
 PROJECT_ID="${GCP_PROJECT_ID:?Set GCP_PROJECT_ID env var}"
 
-# Domain(s) for the SSL certificate
-SSL_DOMAINS="api-staging.rocketpay.co.in,stage-api-pg.rocketpay.co.in,admin-staging.udharpay.com,staging-distributor.rocketpay.co.in"
-
 echo "=== Step 1: Reserve a Global Static IP ==="
 gcloud compute addresses create stage-lbip-as1-udharpay-api \
   --project="$PROJECT_ID" \
@@ -31,18 +28,22 @@ STATIC_IP=$(gcloud compute addresses describe stage-lbip-as1-udharpay-api \
   --project="$PROJECT_ID" --global --format="value(address)")
 echo "Reserved static IP: $STATIC_IP"
 
-echo "=== Step 2: Create Google-Managed SSL Certificate ==="
-gcloud compute ssl-certificates create stage-ssl-as1-udharpay-api \
-  --project="$PROJECT_ID" \
-  --domains="$SSL_DOMAINS" \
-  --global \
-  --quiet
+echo "=== Step 2: Verify SSL Certificate Map Exists ==="
+MAP_NAME="stage-cert-map"
+if ! gcloud certificate-manager maps describe "$MAP_NAME" --project="$PROJECT_ID" >/dev/null 2>&1; then
+  echo "Error: Certificate Map '$MAP_NAME' not found!"
+  echo "Please set up the managed SSL certificates first using DNS Authorization."
+  echo "Go to the '../../ssl-cert-setup/' directory, run the setup scripts,"
+  echo "and then run this load balancer setup script again."
+  exit 1
+fi
+echo "Found SSL Certificate Map: $MAP_NAME"
 
 echo "=== Step 3: Create HTTPS Target Proxy (port 443) ==="
 gcloud compute target-https-proxies create stage-targetproxy-as1-udharpay-api-https \
   --project="$PROJECT_ID" \
   --url-map=stage-lb-as1-udharpay-api \
-  --ssl-certificates=stage-ssl-as1-udharpay-api \
+  --certificate-map="$MAP_NAME" \
   --global \
   --quiet
 
@@ -101,7 +102,7 @@ echo "HTTP:80    →  301 Redirect to HTTPS"
 echo ""
 echo "── Resource Names ──"
 echo "IP:           stage-lbip-as1-udharpay-api"
-echo "SSL:          stage-ssl-as1-udharpay-api"
+echo "Cert Map:     stage-cert-map"
 echo "HTTPS Proxy:  stage-targetproxy-as1-udharpay-api-https"
 echo "HTTPS Fwd:    stage-forwardingrule-as1-udharpay-api-https"
 echo "HTTP Proxy:   stage-targetproxy-as1-udharpay-api-http"
