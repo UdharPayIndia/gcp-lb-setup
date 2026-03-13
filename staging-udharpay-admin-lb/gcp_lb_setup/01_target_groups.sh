@@ -53,6 +53,8 @@ gcloud compute backend-services create "stage-bs-as1-udharpay-admin" \
   --health-checks="stage-hc-as1-udharpay-admin" \
   --port-name="udharpay-admin" \
   --global \
+  --enable-logging \
+  --logging-sample-rate=1 \
   --quiet || echo "Backend service stage-bs-as1-udharpay-admin already exists"
 
 gcloud compute backend-services add-backend "stage-bs-as1-udharpay-admin" \

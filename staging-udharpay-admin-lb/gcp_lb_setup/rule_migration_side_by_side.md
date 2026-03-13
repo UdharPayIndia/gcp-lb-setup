@@ -36,7 +36,8 @@ gcloud compute health-checks create http stage-hc-as1-udharpay-admin \
 
 # 3. Backend service
 gcloud compute backend-services create stage-bs-as1-udharpay-admin \
-  --health-checks=stage-hc-as1-udharpay-admin --port-name=udharpay-admin
+  --health-checks=stage-hc-as1-udharpay-admin --port-name=udharpay-admin \
+  --enable-logging --logging-sample-rate=1
 
 # 4. URL map patch (host rule, default service)
 gcloud compute url-maps add-path-matcher stage-lb-as1-udharpay-api \
