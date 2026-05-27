@@ -27,6 +27,13 @@ service-account*.json
 *-key.json
 
 # ──────────────────────────────────────────────────────────────────
+# AWS-side migration artifacts — this repo is GCP-only.
+# Local copies are fine; they just don't belong in version control.
+# ──────────────────────────────────────────────────────────────────
+load-balancers/*/aws-audit/
+infra/nginx-proxy-to-gcp/
+
+# ──────────────────────────────────────────────────────────────────
 # LB state — local-only scratch
 # ──────────────────────────────────────────────────────────────────
 

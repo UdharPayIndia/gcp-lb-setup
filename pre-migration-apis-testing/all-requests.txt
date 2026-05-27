@@ -1,0 +1,74 @@
+POST    /api/merchant/auth/v2/request-secret
+POST    /api/merchant/devices
+POST    /common/party/v1/login
+GET     /api/help/faq?ui_type=ftux
+GET     /common/wallets/v2
+GET     /v1/merchant/workflow/kyc-type
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=0
+GET     /common/mappings/v1/party
+GET     /api/mas/properties/merchant-properties
+GET     /v1/merchant/mandates/sync?created_at=0&limit=100&updated_at=0
+GET     /payments-and-billing/lock-key/ab-config/v3
+GET     /superkey/keys/v5/list
+POST    /api/mas/properties/user-properties
+GET     /super-key/v1/list
+GET     /common/product-orders/v2/sync?limit=10&sync_sequence=0
+GET     /api/system-status
+GET     /api/merchant/bank_details
+GET     /common/party/v1/banner?product_type=SETTLEMENT
+PUT     /api/merchant/devices/bc2a45ff-708d-4490-9085-02bcf08d7b79
+GET     /v1/merchant/workflow?kyc_type=kyb
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=204293
+GET     /api/mas/properties/user-properties
+GET     /common/product-orders/v2/sync?limit=10&sync_sequence=8423
+GET     /v1/merchant/mandates/sync?created_at=1762268644997&limit=100&updated_at=1773243270903
+GET     /v3/merchant/installments/sync?created_at=0&limit=100&updated_at=0
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=206612
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=210904
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=245505
+GET     /v3/merchant/installments/sync?created_at=1760412708461&limit=100&updated_at=1760412716228
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=250119
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=279495
+GET     /v3/merchant/installments/sync?created_at=1760412708466&limit=100&updated_at=1760412716306
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=319843
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=361943
+GET     /v3/merchant/installments/sync?created_at=1762268646392&limit=100&updated_at=1762268653777
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=404132
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=447394
+GET     /v3/merchant/installments/sync?created_at=1762268646394&limit=100&updated_at=1762268653837
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=491335
+GET     /common/payment-orders/v1/sync?limit=100&server_seq=532402
+POST    /payments-and-billing/lock-key/ab-config/v3
+GET     /v3/merchant/installments/sync?created_at=1762268646389&limit=100&updated_at=1762885720633
+GET     /v3/merchant/installments/sync?created_at=1760412708457&limit=100&updated_at=1767203468194
+GET     /v3/merchant/installments/sync?created_at=1760412708458&limit=100&updated_at=1771608657525
+GET     /v3/merchant/installments/sync?created_at=1762268646391&limit=100&updated_at=1773340269901
+GET     /superkey/keys/v2/controls/definitions
+GET     /credit-score/v1/sync?limit=100&server_sequence=0
+GET     /credit-score/v1/sync?limit=100&server_sequence=206
+POST    /api/mas/properties/merchant-properties
+DELETE  /api/merchant/bank_details/00000199-e0c5-d38b-928e-2a97f7ec6ea0
+POST    /api/merchant/bank_details
+POST    /api/merchant/bank_details/0000019a-4f64-4f0d-9e55-fcebf5e424fb/mark_primary
+POST    /common/product-orders/v2/claim-free-trial
+GET     /common/product-orders/v1/products/v1?product_type=INSTALLMENT&tags=
+GET     /payments-and-billing/lock-key/purchase/v1/methods
+POST    /common/product-orders/v2
+POST    /common/product-orders/v1/0000019c-e5be-b762-86f4-5aa60a96601c/refresh
+GET     /common/product-orders/v2/sync?limit=10&sync_sequence=9750
+POST    /v3/merchant/mandates/compute-charges
+POST    /v3/merchant/mandates
+GET     /v1/merchant/mandates/sync?created_at=1773381149016&limit=100&updated_at=1773381150976
+GET     /v3/merchant/installments/sync?created_at=1773381150689&limit=100&updated_at=1773381150799
+POST    /v2/merchant/mandates/69b3a61d8bfd405b499acb2c/refresh
+DELETE  /v2/merchant/mandates/69b3a61d8bfd405b499acb2c
+GET     /v1/merchant/mandates/sync?created_at=1773381149016&limit=100&updated_at=1773381191107
+GET     /v1/merchant/mandates/sync?created_at=1773381149016&limit=100&updated_at=1773381191509
+POST    /v2/merchant/mandates/690a15e4b1d253499ab84f26/cancel
+GET     /v1/merchant/mandates/sync?created_at=1762268644997&limit=100&updated_at=1773381199811
+
+stage-bs-as1-users-and-verifications-cloudrun
+stage-bs-as1-payments-and-billing-cloudrun
+stage-bs-as1-udharpay-api-cloudrun
+stage-bs-as1-superkey-cloudrun
+stage-bs-as1-workflow-cloudrun

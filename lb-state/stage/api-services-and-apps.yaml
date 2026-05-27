@@ -1,5 +1,4 @@
 defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
-name: stage-lb-as1-api-services-and-apps
 hostRules:
 - hosts:
   - '*'
@@ -13,190 +12,135 @@ hostRules:
 - hosts:
   - admin-staging.udharpay.com
   pathMatcher: admin-paths
+name: stage-lb-as1-api-services-and-apps
 pathMatchers:
-# ── Distributor (AWS Priority 30 — host-header based) ──
-- name: distributor-paths
-  defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
-# ── Main Path Matcher (all other traffic) ──
-- name: main-paths
-  defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
+- defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
+  name: distributor-paths
+- defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
+  name: main-paths
   routeRules:
-  # ── P100: /support-service/* → support-service ──
-  #- priority: 100
-  #  matchRules:
-  #  - prefixMatch: /support-service/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-support-service
-  # ── P110: /account/v2/authenticate → users-and-verifications ──
-  - priority: 110
-    matchRules:
+  - matchRules:
     - fullPathMatch: /account/v2/authenticate
+    priority: 110
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-users-and-verifications
-  # ── P120: /account/* → account-preference ──
-  - priority: 120
-    matchRules:
+  - matchRules:
     - prefixMatch: /account/
+    priority: 120
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-account-preference
-  # ── P130: /account-preference/* → account-preference ──
-  - priority: 130
-    matchRules:
+  - matchRules:
     - prefixMatch: /account-preference/
+    priority: 130
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-account-preference
-  # ── P140: /payments-and-billing/*, /ab-experiment/*, /ab-rollout/* ──
-  - priority: 140
-    matchRules:
+  - matchRules:
     - prefixMatch: /payments-and-billing/
     - prefixMatch: /ab-experiment/
     - prefixMatch: /ab-rollout/
+    priority: 140
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P150: /common/wallets/*, /common/product-orders/*, etc. ──
-  - priority: 150
-    matchRules:
+  - matchRules:
     - prefixMatch: /common/wallets/
     - prefixMatch: /common/product-orders/
     - prefixMatch: /common/payment-orders/
     - prefixMatch: /common/party/
     - prefixMatch: /common/preferences/
+    priority: 150
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P160: /v1/merchant/kyc*, /v1/merchant/workflow*, etc. ──
-  - priority: 160
-    matchRules:
+  - matchRules:
     - prefixMatch: /v1/merchant/kyc
     - prefixMatch: /v1/merchant/workflow
     - prefixMatch: /api/merchant/bank_details
     - prefixMatch: /api/banks
     - prefixMatch: /api/instruments
+    priority: 160
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P170: /api/mas/*, /api/merchant/auth/v2/*, /api/system-status, etc. ──
-  - priority: 170
-    matchRules:
+  - matchRules:
     - prefixMatch: /api/mas/
     - prefixMatch: /api/merchant/auth/v2/
     - fullPathMatch: /api/system-status
     - prefixMatch: /api/merchant/devices
     - prefixMatch: /api/merchant/admin/
+    priority: 170
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P180: /api/help, /v1/merchant/*, /api/merchant/user-query*, /api/merchant/auth* ──
-  - priority: 180
-    matchRules:
+  - matchRules:
     - fullPathMatch: /api/help
     - prefixMatch: /v1/merchant/
     - prefixMatch: /api/merchant/user-query
     - prefixMatch: /api/merchant/auth
+    priority: 180
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
-  # ── P190: /api/merchant/* → payments (catch-all for remaining merchant paths) ──
-  - priority: 190
-    matchRules:
+  - matchRules:
     - prefixMatch: /api/merchant/
+    priority: 190
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P200: /superkey/*, /rocketscore/*, /super-key/*, /credit-score/*, /referrals/* ──
-  - priority: 200
-    matchRules:
+  - matchRules:
     - prefixMatch: /superkey/
     - prefixMatch: /rocketscore/
     - prefixMatch: /super-key/
     - prefixMatch: /credit-score/
     - prefixMatch: /referrals/
+    priority: 200
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
-  # ── P210: /verification/*, /auth/*, /analytics/*, /auth-migration/*, /acl/* ──
-  - priority: 210
-    matchRules:
+  - matchRules:
     - prefixMatch: /verification/
     - prefixMatch: /auth/
     - prefixMatch: /analytics/
     - prefixMatch: /auth-migration/
     - prefixMatch: /acl/
+    priority: 210
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-users-and-verifications
-  # ── P220: /dlt/* ──
-  - priority: 220
-    matchRules:
+  - matchRules:
     - prefixMatch: /dlt/
+    priority: 220
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-dlt
-  # ── P230: /v2/merchant/*, /api/*, /common/mappings/*, /v1/customer/*, /v3/merchant/* ──
-  - priority: 230
-    matchRules:
+  - matchRules:
     - prefixMatch: /v2/merchant/
     - prefixMatch: /api/
     - prefixMatch: /common/mappings/
     - prefixMatch: /v1/customer/
     - prefixMatch: /v3/merchant/
+    priority: 230
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
-  # ── P240: /v4/mandates*, /v4/installments* ──
-  - priority: 240
-    matchRules:
+  - matchRules:
     - prefixMatch: /v4/mandates
     - prefixMatch: /v4/installments
+    priority: 240
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
-  # ── P250: /rule/* ──
-  - priority: 250
-    matchRules:
+  - matchRules:
     - prefixMatch: /rule/
+    priority: 250
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-platform-rule-engine
-  # ── P260: /charge-service/* ──
-  #- priority: 260
-  #  matchRules:
-  #  - prefixMatch: /charge-service/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-platform-charge-service
-  # ── P270: /party/* ──
-  #- priority: 270
-  #  matchRules:
-  #  - prefixMatch: /party/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-platform-party-service
-  # ── P280: /kyc/*, /workflow/* ──
-  - priority: 280
-    matchRules:
+  - matchRules:
     - prefixMatch: /kyc/
     - prefixMatch: /workflow/
+    priority: 280
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-workflow
-  # ── P290: /key/* ──
-  #- priority: 290
-  #  matchRules:
-  #  - prefixMatch: /key/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-key
-  # ── P300: /key-gateway/* ──
-  - priority: 300
-    matchRules:
+  - matchRules:
     - prefixMatch: /key-gateway/
+    priority: 300
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-key-gateway
-  # ── P310: /cus/* ──
-  - priority: 310
-    matchRules:
+  - matchRules:
     - prefixMatch: /cus/
+    priority: 310
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P320: /book/* ──
-  - priority: 320
-    matchRules:
+  - matchRules:
     - prefixMatch: /book/
+    priority: 320
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-platform-common
-  # ── P330: /product-order/* ──
-  - priority: 330
-    matchRules:
+  - matchRules:
     - prefixMatch: /product-order/
+    priority: 330
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-product-order
-  # ── P340: /lending/* ──
-  #- priority: 340
-  #  matchRules:
-  #  - prefixMatch: /lending/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-lending
-  # ── P350: /crm/* ──
-  - priority: 350
-    matchRules:
+  - matchRules:
     - prefixMatch: /crm/
+    priority: 350
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-crm
-  # ── P360: /agreement/* ──
-  - priority: 360
-    matchRules:
+  - matchRules:
     - prefixMatch: /agreement/
+    priority: 360
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  # ── P370: /support-agent/*, /analytics-agent/* ──
-  #- priority: 370
-  #  matchRules:
-  #  - prefixMatch: /support-agent/
-  #  - prefixMatch: /analytics-agent/
-  #  service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-ai-apps
-  # ── P380: /common/charges/* ──
-  - priority: 380
-    matchRules:
+  - matchRules:
     - prefixMatch: /common/charges/
+    priority: 380
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: pg-paths
