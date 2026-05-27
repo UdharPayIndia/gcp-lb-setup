@@ -1,0 +1,50 @@
+# ──────────────────────────────────────────────────────────────────
+# Secrets / sensitive artifacts — never commit
+# ──────────────────────────────────────────────────────────────────
+
+# Raw GCP resource exports may contain plaintext env-var secrets
+# (AWS keys, New Relic license keys, JWTs etc.). Always review before
+# moving anything out of temp/ into the tracked tree.
+temp/
+
+# Captured HTTP traffic (HAR files, request dumps) — typically contain
+# auth tokens, JWTs, PII.
+*.har
+pre-migration-apis-testing/transactions.*
+pre-migration-apis-testing/rocketpay_env.json
+pre-migration-apis-testing/rocketpay_collection.json
+
+# Generic credential / env files
+*.pem
+*.key
+*.p12
+*.jks
+*.env
+.env.*
+!.env.example
+credentials*.json
+service-account*.json
+*-key.json
+
+# ──────────────────────────────────────────────────────────────────
+# LB state — local-only scratch
+# ──────────────────────────────────────────────────────────────────
+
+# Exports created by scripts/lb_apply.sh and scripts/lb_diff.sh while
+# they fetch the live URL map to compare against repo state.
+*.live.yaml
+*.live.tmp.yaml
+
+# Backups created by sed -i.bak and manual snapshots
+*.backup
+*.bak
+
+# ──────────────────────────────────────────────────────────────────
+# OS / editor noise
+# ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

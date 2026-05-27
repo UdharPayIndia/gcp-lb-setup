@@ -1,0 +1,103 @@
+# Cloud Build pipeline — apply repo state to live GCP URL maps.
+#
+# Trigger setup (one-time, done outside this file):
+#   gcloud builds triggers create github \
+#     --name=gcp-networking-setup-apply \
+#     --repo-name=<repo>  --repo-owner=<org> \
+#     --branch-pattern='^main$' \
+#     --build-config=ci/cloudbuild.yaml \
+#     --service-account=projects/rocketpay-gcp-setup/serviceAccounts/lb-iac-cloudbuild@rocketpay-gcp-setup.iam.gserviceaccount.com \
+#     --region=asia-south1
+#
+# Required IAM on the trigger service account (per project that hosts an LB):
+#   - roles/compute.loadBalancerAdmin   (compute.urlMaps.get / .update / .use)
+#   - roles/logging.logWriter           (CloudBuild logs)
+#
+# Design: this pipeline is idempotent — it iterates every registered LB
+# and applies the repo state if (and only if) it differs from live.
+# Running it on a no-op commit is a no-op. Running it after someone has
+# made an out-of-band change in the console will *revert* live to match
+# the repo (which is the intended IaC behavior — single source of truth).
+
+steps:
+  # ─── Step 0: Install yq (needed by scripts/_registry.sh) ───
+  - id: install-yq
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        apt-get update -qq && apt-get install -y -qq curl
+        curl -sSL -o /workspace/yq \
+          https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64
+        chmod +x /workspace/yq
+        /workspace/yq --version
+
+  # ─── Step 1: Diff every registered LB; apply if changed ───
+  - id: apply-changed-lbs
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    env:
+      - 'PATH=/workspace:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        cd /workspace
+        chmod +x scripts/*.sh
+
+        changed_count=0
+        applied_count=0
+        failed=()
+
+        while IFS= read -r state_file; do
+          echo ""
+          echo "════════════════════════════════════════════════════════════"
+          echo "LB: $state_file"
+          echo "════════════════════════════════════════════════════════════"
+
+          # lb_diff exits: 0 = no diff, 1 = diff present, 2 = error fetching live.
+          set +e
+          ./scripts/lb_diff.sh "$state_file"
+          diff_rc=$?
+          set -e
+
+          case $diff_rc in
+            0)
+              echo "→ no change; skipping apply."
+              ;;
+            1)
+              changed_count=$((changed_count + 1))
+              echo ""
+              echo "→ applying..."
+              if ./scripts/lb_apply.sh "$state_file" --yes; then
+                applied_count=$((applied_count + 1))
+              else
+                failed+=("$state_file")
+                echo "✗ apply failed for $state_file"
+              fi
+              ;;
+            *)
+              failed+=("$state_file")
+              echo "✗ diff errored (rc=$diff_rc) for $state_file"
+              ;;
+          esac
+        done < <(yq eval '.load_balancers[].state_file' lb-state/registry.yaml)
+
+        echo ""
+        echo "════════════════════════════════════════════════════════════"
+        echo "Summary: $changed_count changed, $applied_count applied, ${#failed[@]} failed"
+        echo "════════════════════════════════════════════════════════════"
+
+        if [[ ${#failed[@]} -gt 0 ]]; then
+          printf 'FAILED: %s\n' "${failed[@]}"
+          exit 1
+        fi
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+# Budget the run — URL-map operations are usually <30s each. Leaves headroom
+# for a dozen LBs without runaway cost.
+timeout: 900s

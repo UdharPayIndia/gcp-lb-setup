@@ -1,0 +1,24 @@
+# Registry of GCP URL maps managed in this repo.
+#
+# Each entry maps a state file (under lb-state/) to its live GCP URL map.
+# The CloudBuild pipeline (ci/cloudbuild.yaml) reads this to know which
+# `gcloud compute url-maps import` call to make for a given changed file.
+#
+# When adding a new LB:
+#   1. Add an entry below.
+#   2. Run `./scripts/lb_export.sh <state_file>` to snapshot current live state into the repo.
+#   3. Commit the new state file alongside the registry change.
+#
+# Fields:
+#   state_file: path under lb-state/, with .yaml extension
+#   project:    GCP project ID hosting the URL map
+#   url_map:    name of the URL map resource in GCP
+#   scope:      "global" or "region:<region>" (regional external LBs)
+#   env:        free-form label (stage / prod / dev) — used for log tagging only
+
+load_balancers:
+  - state_file: stage/api-services-and-apps.yaml
+    project: rocketpay-gcp-setup
+    url_map: stage-lb-as1-api-services-and-apps
+    scope: global
+    env: stage
