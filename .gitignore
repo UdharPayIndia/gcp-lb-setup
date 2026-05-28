@@ -31,7 +31,7 @@ service-account*.json
 # Local copies are fine; they just don't belong in version control.
 # ──────────────────────────────────────────────────────────────────
 load-balancers/*/aws-audit/
-infra/nginx-proxy-to-gcp/
+local-docs/
 
 # ──────────────────────────────────────────────────────────────────
 # LB state — local-only scratch
