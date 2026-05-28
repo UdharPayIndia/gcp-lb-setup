@@ -62,13 +62,13 @@ pathMatchers:
     priority: 170
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
   - matchRules:
-    - fullPathMatch: /api/help
-    - prefixMatch: /v1/merchant/
+    - prefixMatch: /api/help
     - prefixMatch: /api/merchant/user-query
-    - prefixMatch: /api/merchant/auth
     priority: 180
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
   - matchRules:
+    - prefixMatch: /v1/merchant/
+    - prefixMatch: /api/merchant/auth
     - prefixMatch: /api/merchant/
     priority: 190
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
@@ -93,18 +93,18 @@ pathMatchers:
     priority: 220
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-dlt
   - matchRules:
-    - prefixMatch: /v2/merchant/
-    - prefixMatch: /api/
     - prefixMatch: /common/mappings/
-    - prefixMatch: /v1/customer/
-    - prefixMatch: /v3/merchant/
     priority: 230
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
   - matchRules:
+    - prefixMatch: /v2/merchant/
+    - prefixMatch: /v3/merchant/
+    - prefixMatch: /v1/customer/
     - prefixMatch: /v4/mandates
     - prefixMatch: /v4/installments
+    - prefixMatch: /api/
     priority: 240
-    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
   - matchRules:
     - prefixMatch: /rule/
     priority: 250
