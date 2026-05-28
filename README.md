@@ -30,32 +30,69 @@ team scale. This repo is the fix.
 │
 ├── load-balancers/                        # per-LB scaffolding from the AWS→GCP migration
 │   ├── stage-udharpay-api/                #   (AWS: stage-udharpay-api-lb)
+│   │   ├── gcp-setup/                     #     one-time scripts that built the GCP equivalent
+│   │   │   ├── 01_vms.sh
+│   │   │   ├── 01aa_create_secrets.sh
+│   │   │   ├── 01ab_deploy_cloud_run_services.sh
+│   │   │   ├── 01ac_update_cloud_run_image.sh
+│   │   │   ├── 02_target_groups.sh
+│   │   │   ├── 03_rules.sh
+│   │   │   ├── 04_load_balancer.sh
+│   │   │   ├── 05_test_routing.sh
+│   │   │   ├── 99_destroy_all.sh
+│   │   │   └── README.md
+│   │   ├── comparison-aws-vs-gcp.md
+│   │   └── swimlanes.txt
 │   ├── stage-rpg/                         #   (AWS: stage-rpg-lb)
+│   │   ├── gcp-setup/
+│   │   │   ├── 01_target_groups.sh
+│   │   │   └── 02_rules.sh
+│   │   ├── rule-migration.md
+│   │   └── swimlanes.txt
 │   └── stage-udharpay-admin/              #   (AWS: staging-udharpay-admin-lb)
-│       each contains:
-│         aws-audit/      JSON snapshot of the source AWS LB + fetch.sh
-│         gcp-setup/      one-time scripts that built the GCP equivalent
-│         swimlanes.txt   routing diagram source
-│         {comparison,rule-migration}.md   AWS↔GCP mapping notes
+│       ├── gcp-setup/
+│       │   ├── 01_target_groups.sh
+│       │   └── 02_rules.sh
+│       ├── rule-migration.md
+│       └── swimlanes.txt
+│   # Note: aws-audit/ directories are gitignored (local-only AWS snapshots)
 │
-├── infra/                                 # shared infrastructure setup
+├── infra/                                 # shared GCP infrastructure setup
 │   ├── ssl-cert-setup/                    #   GCP managed-cert provisioning
-│   ├── nginx-proxy-to-gcp/                #   AWS-side nginx proxying to GCP (bridge during cutover)
-│   │   └── routing-snapshots/             #   port-80.conf / port-443.conf captures
+│   │   ├── 01_dns_auth.sh
+│   │   ├── 02_create_cert.sh
+│   │   ├── 03_attach_cert.sh
+│   │   └── README.md
 │   ├── cloudbuild-triggers/               #   triggers for service repos (not this one)
+│   │   └── service-repo-triggers.sh
 │   └── vm-setup/                          #   JRE / Docker / arm64 migration helpers
+│       ├── jdk-jre-env-setup.sh
+│       ├── setup-jre.sh
+│       ├── from-gcp1-to-gcp-arm64.sh
+│       └── demo-docker-compose.yaml
+│   # Note: nginx-proxy-to-gcp/ (AWS cutover bridge) is not tracked — see local-docs/
 │
 ├── docs/                                  # cross-cutting documentation
 │   ├── lb-audit-crosscheck.md             #   AWS↔GCP audit verification
 │   ├── port-conflict-unified-routing.md   #   port remapping rationale
 │   └── swimlanes-io-syntax.txt
 │
-└── pre-migration-apis-testing/            # postman + HAR-based API coverage tools
+└── pre-migration-apis-testing/            # API coverage tooling
+    ├── all-requests.txt
+    ├── extract_unique_apis.py
+    └── generate_postman_collection.py
+    # Note: HAR captures, Postman exports, and env files are gitignored
 ```
 
+**Gitignored (local-only, never committed):**
+- `load-balancers/*/aws-audit/` — raw AWS LB JSON snapshots
+- `local-docs/` — local reference material (nginx configs, architecture notes, etc.)
+- `temp/` — scratch exports; may contain plaintext secrets from GCP resource dumps
+- `*.har`, Postman exports, `*.env`, `*.pem`, `*.key`, credential files
+
 Only `lb-state/`, `scripts/`, and `ci/` are consumed by the live-update
-pipeline. Everything else (`load-balancers/`, `infra/`, `docs/`) is migration
-documentation and one-time setup scripts kept for reference.
+pipeline. Everything else is migration documentation and one-time setup
+scripts kept for reference.
 
 ---
 
@@ -180,8 +217,11 @@ blocks the usual offenders:
   contain JWTs.
 - `*.pem`, `*.key`, `*.env`, `service-account*.json`, `credentials*.json`.
 
-**Known follow-up:** `temp/existing-api-service-as-manually-setup-on-gcp-cloudrun.yaml`
-shows the `api` Cloud Run service has `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`
-/ `NEWRELIC_LICENSE_KEY` as plaintext env vars on a *running* service. The
-sibling `users-verifications` service already pulls those from Secret Manager —
-the same pattern should be applied to `api`, and the keys rotated.
+**Known follow-up:** The live `api` Cloud Run service may still have
+`AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` / `NEWRELIC_LICENSE_KEY` as
+plaintext env vars. The deploy script (`load-balancers/stage-udharpay-api/gcp-setup/01ab_deploy_cloud_run_services.sh`)
+already uses `--set-secrets` to pull these from Secret Manager on next deploy.
+Prerequisite: create the three Secret Manager entries
+(`rp-stage-secret-api-aws-access-key-id`, `rp-stage-secret-api-aws-secret-access-key`,
+`rp-stage-secret-api-newrelic-license-key`) and rotate the keys at source before
+re-deploying.
