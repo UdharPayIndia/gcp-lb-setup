@@ -12,7 +12,7 @@ set -euo pipefail
 PROJECT_ID="${GCP_PROJECT_ID:?Set GCP_PROJECT_ID env var}"
 URL_MAP_NAME="stage-lb-as1-udharpay-api"
 PATH_MATCHER_NAME="admin-paths"
-NEW_HOST="admin-staging.udharpay.com"
+NEW_HOST="gcp-admin-staging.udharpay.com"
 BACKEND_SERVICE="stage-bs-as1-udharpay-admin"
 
 echo "=== Patching URL Map: $URL_MAP_NAME ==="
