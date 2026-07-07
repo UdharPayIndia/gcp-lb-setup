@@ -7,10 +7,16 @@ hostRules:
   - gcp-staging-distributor.rocketpay.co.in
   pathMatcher: distributor-paths
 - hosts:
+  - staging-distributor.rocketpay.co.in
+  pathMatcher: distributor-paths
+- hosts:
   - gcp-stage-api-pg.rocketpay.co.in
   pathMatcher: pg-paths
 - hosts:
   - gcp-admin-staging.udharpay.com
+  pathMatcher: admin-paths
+- hosts:
+  - admin-staging.udharpay.com
   pathMatcher: admin-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
