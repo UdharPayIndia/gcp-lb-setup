@@ -13,6 +13,9 @@ hostRules:
   - gcp-stage-api-pg.rocketpay.co.in
   pathMatcher: pg-paths
 - hosts:
+  - stage-api-pg.rocketpay.co.in
+  pathMatcher: pg-paths
+- hosts:
   - gcp-admin-staging.udharpay.com
   pathMatcher: admin-paths
 - hosts:
