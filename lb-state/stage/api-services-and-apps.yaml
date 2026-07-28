@@ -151,10 +151,6 @@ pathMatchers:
     - prefixMatch: /common/charges/
     priority: 381
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
-  - matchRules:
-    - prefixMatch: /fii-gateway/
-    priority: 390
-    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-fii-gateway
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: pg-paths
   pathRules:
