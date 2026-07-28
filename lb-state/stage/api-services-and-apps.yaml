@@ -22,7 +22,10 @@ hostRules:
   - admin-staging.udharpay.com
   pathMatcher: admin-paths
 - hosts:
-  - api-staging.merchant.rocketpay.co.in
+  - gcp-staging-merchant.rocketpay.co.in
+  pathMatcher: merchant-paths
+- hosts:
+  - staging-merchant.rocketpay.co.in
   pathMatcher: merchant-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
