@@ -66,6 +66,7 @@ create_bs() {
     --health-checks="$HC_NAME" \
     --port-name="$NAMED_PORT" \
     --global \
+    --load-balancing-scheme=EXTERNAL_MANAGED \
     --enable-logging \
     --logging-sample-rate=1 \
     --quiet || echo "Backend service $BS_NAME already exists"
