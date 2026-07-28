@@ -17,7 +17,7 @@ EXISTING_PORTS=$(gcloud compute instance-groups unmanaged describe "$IG_NAME" \
   --project="$PROJECT_ID" --zone="$ZONE" \
   --format="json" | jq -r '.namedPorts[]? | "\(.name):\(.port)"' | paste -sd "," -)
 
-NEW_PORTS="pg-payment-account:8101,pg-payment-order:8102,pg-payment-gateway:8103,pg-payment-mandate:8104,pg-payment-instrument:8105"
+NEW_PORTS="pg-payment-account:8101,pg-payment-order:8102,pg-payment-gateway:8103,pg-payment-mandate:8104,pg-payment-instrument:8105,fii-gateway:8282,merchant-app:8283"
 
 if [ -n "$EXISTING_PORTS" ]; then
   ALL_PORTS="${EXISTING_PORTS},${NEW_PORTS}"
@@ -53,6 +53,8 @@ create_hc "stage-hc-as1-pg-payment-order"       "/payment-order/actuator/health"
 create_hc "stage-hc-as1-pg-payment-gateway"     "/payment-gateway/actuator/health" 8103
 create_hc "stage-hc-as1-pg-payment-mandate"     "/payment-mandate/actuator/health" 8104
 create_hc "stage-hc-as1-pg-payment-instrument"  "/payment-instrument/actuator/health" 8105
+create_hc "stage-hc-as1-fii-gateway"            "/fii-gateway/actuator/health" 8282
+create_hc "stage-hc-as1-merchant-app"           "/" 8283
 
 echo "=== Step 3: Create Backend Services ==="
 create_bs() {
@@ -81,5 +83,7 @@ create_bs "stage-bs-as1-pg-payment-order"       "stage-hc-as1-pg-payment-order" 
 create_bs "stage-bs-as1-pg-payment-gateway"     "stage-hc-as1-pg-payment-gateway"     "pg-payment-gateway"
 create_bs "stage-bs-as1-pg-payment-mandate"     "stage-hc-as1-pg-payment-mandate"     "pg-payment-mandate"
 create_bs "stage-bs-as1-pg-payment-instrument"  "stage-hc-as1-pg-payment-instrument"  "pg-payment-instrument"
+create_bs "stage-bs-as1-fii-gateway"            "stage-hc-as1-fii-gateway"            "fii-gateway"
+create_bs "stage-bs-as1-merchant-app"           "stage-hc-as1-merchant-app"           "merchant-app"
 
 echo "=== Target Groups Setup Complete ==="
