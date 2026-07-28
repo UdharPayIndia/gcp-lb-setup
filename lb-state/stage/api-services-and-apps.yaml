@@ -21,10 +21,15 @@ hostRules:
 - hosts:
   - admin-staging.udharpay.com
   pathMatcher: admin-paths
+- hosts:
+  - api-staging.merchant.rocketpay.co.in
+  pathMatcher: merchant-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
   name: distributor-paths
+- defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-merchant-app
+  name: merchant-paths
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: main-paths
   routeRules:
