@@ -19,11 +19,20 @@ hostRules:
   - gcp-stage-api-pg.rocketpay.co.in
   pathMatcher: pg-paths
 - hosts:
+  - stage-api-pg.rocketpay.co.in
+  pathMatcher: pg-paths
+- hosts:
   - gcp-admin-staging.udharpay.com
   pathMatcher: admin-paths
 - hosts:
   - admin-staging.udharpay.com
   pathMatcher: admin-paths
+- hosts:
+  - gcp-staging-merchant.rocketpay.co.in
+  pathMatcher: stage-merchant-paths
+- hosts:
+  - staging-merchant.rocketpay.co.in
+  pathMatcher: stage-merchant-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
@@ -158,6 +167,10 @@ pathMatchers:
     - prefixMatch: /common/charges/
     priority: 381
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
+  - matchRules:
+    - prefixMatch: /fii-gateway/
+    priority: 390
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-fii-gateway
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: pg-paths
   pathRules:
