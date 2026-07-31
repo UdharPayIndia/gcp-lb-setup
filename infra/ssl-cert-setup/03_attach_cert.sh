@@ -18,6 +18,8 @@ DOMAINS=(
   "stage-api-pg.rocketpay.co.in"
   "admin-staging.udharpay.com"
   "staging-distributor.rocketpay.co.in"
+  "merchant.rocketpay.co.in"
+  "stage-merchant.rocketpay.co.in"
   "gcp-api-staging.rocketpay.co.in"
   "gcp-stage-api-pg.rocketpay.co.in"
   "gcp-admin-staging.udharpay.com"

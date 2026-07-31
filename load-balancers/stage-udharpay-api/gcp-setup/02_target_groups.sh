@@ -70,6 +70,8 @@ echo "=== Step 1: Ensure Instance Group with all named ports ==="
 # platform-common:8094,\
 # product-order:8090,\
 # distributor-app:3000,\
+# merchant-app-prod:8061,\
+# merchant-app-stage:8283,\
 # lending:8088,\
 # crm:8087,\
 # udharpay-admin:8095,\
@@ -82,6 +84,33 @@ echo "=== Step 1: Ensure Instance Group with all named ports ==="
 #   --quiet
 
 # echo "Instance group $IG_NAME updated with all named ports"
+
+# ─── Step 1b: Add merchant-app named ports (non-destructive append) ───────────
+# set-named-ports OVERWRITES the whole list, so fetch the existing ports first
+# and only append the merchant ports that aren't already present. Safe to
+# re-run — a no-op once the ports exist.
+#   merchant-app-prod:8061   (prod container, routed via merchant.rocketpay.co.in)
+#   merchant-app-stage:8283  (stage container, routed via stage-merchant.rocketpay.co.in)
+echo "=== Step 1b: Ensure merchant-app named ports on $IG_NAME ==="
+EXISTING_PORTS=$(gcloud compute instance-groups unmanaged describe "$IG_NAME" \
+  --project="$PROJECT_ID" --zone="$ZONE" \
+  --format="json" | jq -r '.namedPorts[]? | "\(.name):\(.port)"' | paste -sd "," -)
+ALL_PORTS="$EXISTING_PORTS"
+for NP in "merchant-app-prod:8061" "merchant-app-stage:8283"; do
+  if echo "$ALL_PORTS" | tr ',' '\n' | grep -qx "$NP"; then
+    echo "  -> $NP already present"
+  else
+    if [ -n "$ALL_PORTS" ]; then ALL_PORTS="${ALL_PORTS},${NP}"; else ALL_PORTS="$NP"; fi
+    echo "  -> queuing $NP"
+  fi
+done
+if [ "$ALL_PORTS" != "$EXISTING_PORTS" ]; then
+  gcloud compute instance-groups unmanaged set-named-ports "$IG_NAME" \
+    --project="$PROJECT_ID" --zone="$ZONE" \
+    --named-ports="$ALL_PORTS" \
+    --quiet
+  echo "  -> named ports updated"
+fi
 
 # ─── Step 2: Create Health Checks (1 per service) ────────────────────────────
 echo "=== Step 2: Create Health Checks ==="
@@ -116,6 +145,11 @@ create_hc "stage-hc-as1-key-gateway"                 "/key-gateway/"            
 create_hc "stage-hc-as1-platform-common"             "/book/actuator/health"           8094
 create_hc "stage-hc-as1-product-order"               "/product-order/actuator/health"  8090
 create_hc "stage-hc-as1-distributor-app"             "/"                               3000
+# merchant-app — KMP/Wasm web app served by server.js. Two containers on the same VM:
+#   prod  host 8061 -> container 8283  (merchant.rocketpay.co.in)
+#   stage host 8283 -> container 8283  (stage-merchant.rocketpay.co.in)
+create_hc "stage-hc-as1-merchant-app-prod"           "/"                               8061
+create_hc "stage-hc-as1-merchant-app-stage"          "/"                               8283
 # create_hc "stage-hc-as1-lending"                     "/lending/actuator/health"        8088
 create_hc "stage-hc-as1-crm"                         "/crm/"                           8087
 # create_hc "stage-hc-as1-ai-apps"                     "/support-agent/health"           3001
@@ -169,6 +203,8 @@ create_bs "stage-bs-as1-key-gateway"                     "stage-hc-as1-key-gatew
 create_bs "stage-bs-as1-platform-common"                 "stage-hc-as1-platform-common"            "platform-common"
 create_bs "stage-bs-as1-product-order"                   "stage-hc-as1-product-order"              "product-order"
 create_bs "stage-bs-as1-distributor-app"                 "stage-hc-as1-distributor-app"            "distributor-app"
+create_bs "stage-bs-as1-merchant-app-prod"               "stage-hc-as1-merchant-app-prod"          "merchant-app-prod"
+create_bs "stage-bs-as1-merchant-app-stage"              "stage-hc-as1-merchant-app-stage"         "merchant-app-stage"
 # create_bs "stage-bs-as1-lending"                         "stage-hc-as1-lending"                    "lending"
 create_bs "stage-bs-as1-crm"                             "stage-hc-as1-crm"                        "crm"
 # create_bs "stage-bs-as1-ai-apps"                         "stage-hc-as1-ai-apps"                    "ai-apps"
