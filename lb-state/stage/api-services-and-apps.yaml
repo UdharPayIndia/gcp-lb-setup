@@ -45,6 +45,131 @@ pathMatchers:
   name: main-paths
   routeRules:
   - matchRules:
+    - fullPathMatch: /super-key/v2
+    - fullPathMatch: /super-key/v2/
+    priority: 20
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /super-key/v1
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - fullPathMatch: /super-key/v3
+    - fullPathMatch: /super-key/v3/
+    priority: 21
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /super-key/v1
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - fullPathMatch: /superkey/keys/list
+    - fullPathMatch: /superkey/keys/v2/list
+    - fullPathMatch: /superkey/keys/v3/list
+    - fullPathMatch: /superkey/keys/v4/list
+    priority: 30
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /superkey/keys/v5/list
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - fullPathMatch: /superkey/keys/controls/definitions
+    - fullPathMatch: /superkey/keys/v2/controls/definitions
+    priority: 40
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /superkey/keys/v5/controls/definitions
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - fullPathMatch: /superkey/keys/v2/transfer/list
+    priority: 41
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /superkey/keys/v5/transfer/list
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - fullPathMatch: /superkey/keys/summary
+    priority: 50
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /superkey/keys/v5/summary
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - prefixMatch: /superkey/keys/device-catalogue
+    priority: 51
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /superkey/keys/v5/device-catalogue
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/actions
+    priority: 60
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/actions
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/actions/location
+    priority: 61
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/actions/location
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/actions/unregister
+    priority: 62
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/actions/unregister
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/actions/reminder
+    priority: 63
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/actions/reminder
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/controls/status
+    priority: 64
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/controls/status
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/controls/refresh
+    priority: 65
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/controls/refresh
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/remove
+    priority: 66
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/remove
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/reset
+    priority: 67
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/reset
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/auto-reminder
+    priority: 68
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/auto-reminder
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/control/{control}/apply/{action}
+    priority: 69
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/control/{control}/apply/{action}
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
     - fullPathMatch: /account/v2/authenticate
     priority: 110
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-users-and-verifications
