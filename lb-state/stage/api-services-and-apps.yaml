@@ -295,25 +295,6 @@ pathMatchers:
   - matchRules:
     - prefixMatch: /fii-gateway/
     priority: 390
-    routeAction:
-      corsPolicy:
-        allowHeaders:
-        - content-type
-        - x-app
-        - x-app-context
-        - x-app-version
-        - x-platform
-        - x-platform-version
-        - x-token
-        allowMethods:
-        - GET
-        - POST
-        - OPTIONS
-        allowOrigins:
-        - https://staging-merchant.rocketpay.co.in
-        - https://gcp-staging-merchant.rocketpay.co.in
-        disabled: false
-        maxAge: 3600
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-fii-gateway
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: pg-paths
