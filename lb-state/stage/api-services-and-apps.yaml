@@ -298,6 +298,7 @@ pathMatchers:
     routeAction:
       corsPolicy:
         allowHeaders:
+        - content-type
         - x-app
         - x-app-context
         - x-app-version
