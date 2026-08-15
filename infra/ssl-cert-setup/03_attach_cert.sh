@@ -11,7 +11,7 @@ set -euo pipefail
 PROJECT_ID="${GCP_PROJECT_ID:?Set GCP_PROJECT_ID env var}"
 MAP_NAME="stage-cert-map"
 CERT_NAME="stage-cert-rocketpay-udharpay"
-TARGET_HTTPS_PROXY="stage-targetproxy-as1-udharpay-api-https"
+TARGET_HTTPS_PROXY="stage-lb-as1-api-services-and-target-proxy"
 
 DOMAINS=(
   "api-staging.rocketpay.co.in"
@@ -24,6 +24,9 @@ DOMAINS=(
   "gcp-stage-api-pg.rocketpay.co.in"
   "gcp-admin-staging.udharpay.com"
   "gcp-staging-distributor.rocketpay.co.in"
+  "stage-customer-dlc.rocketpay.co.in"
+  "staging-customer-dlc.rocketpay.co.in"
+  "gcp-staging-customer-dlc.rocketpay.co.in"
 )
 
 echo "=== Step 1: Create Certificate Map ==="

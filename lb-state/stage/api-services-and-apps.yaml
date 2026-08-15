@@ -33,6 +33,15 @@ hostRules:
 - hosts:
   - staging-merchant.rocketpay.co.in
   pathMatcher: stage-merchant-paths
+- hosts:
+  - stage-customer-dlc.rocketpay.co.in
+  pathMatcher: stage-customer-dlc-paths
+- hosts:
+  - staging-customer-dlc.rocketpay.co.in
+  pathMatcher: stage-customer-dlc-paths
+- hosts:
+  - gcp-staging-customer-dlc.rocketpay.co.in
+  pathMatcher: stage-customer-dlc-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
@@ -41,6 +50,8 @@ pathMatchers:
   name: merchant-paths
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-merchant-app-stage
   name: stage-merchant-paths
+- defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-customer-dlc-app-stage
+  name: stage-customer-dlc-paths
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: main-paths
   routeRules:
