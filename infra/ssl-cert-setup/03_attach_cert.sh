@@ -24,9 +24,7 @@ DOMAINS=(
   "gcp-stage-api-pg.rocketpay.co.in"
   "gcp-admin-staging.udharpay.com"
   "gcp-staging-distributor.rocketpay.co.in"
-  "stage-customer-dlc.rocketpay.co.in"
-  "staging-customer-dlc.rocketpay.co.in"
-  "gcp-staging-customer-dlc.rocketpay.co.in"
+  "staging-payment-schedule-customer.rocketpay.co.in"
 )
 
 echo "=== Step 1: Create Certificate Map ==="
