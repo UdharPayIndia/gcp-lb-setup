@@ -220,7 +220,7 @@ pathMatchers:
     - prefixMatch: /api/help
     - prefixMatch: /api/merchant/user-query
     priority: 180
-    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-udharpay-api
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-payments-and-billing
   - matchRules:
     - prefixMatch: /v1/merchant/
     - prefixMatch: /api/merchant/auth
