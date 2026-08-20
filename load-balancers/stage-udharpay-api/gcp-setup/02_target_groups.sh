@@ -92,12 +92,13 @@ echo "=== Step 1: Ensure Instance Group with all named ports ==="
 #   merchant-app-prod:8061   (prod container, routed via merchant.rocketpay.co.in)
 #   merchant-app-stage:8283  (stage container, routed via stage-merchant.rocketpay.co.in)
 #   customer-dlc-app-stage:8284  (stage container, routed via stage-customer-dlc.rocketpay.co.in)
+#   checkout-app-stage:8285      (stage container, routed via checkout-staging.rocketpay.co.in / .udharpay.com)
 echo "=== Step 1b: Ensure merchant-app named ports on $IG_NAME ==="
 EXISTING_PORTS=$(gcloud compute instance-groups unmanaged describe "$IG_NAME" \
   --project="$PROJECT_ID" --zone="$ZONE" \
   --format="json" | jq -r '.namedPorts[]? | "\(.name):\(.port)"' | paste -sd "," -)
 ALL_PORTS="$EXISTING_PORTS"
-for NP in "merchant-app-prod:8061" "merchant-app-stage:8283" "customer-dlc-app-stage:8284"; do
+for NP in "merchant-app-prod:8061" "merchant-app-stage:8283" "customer-dlc-app-stage:8284" "checkout-app-stage:8285"; do
   if echo "$ALL_PORTS" | tr ',' '\n' | grep -qx "$NP"; then
     echo "  -> $NP already present"
   else
@@ -154,6 +155,9 @@ create_hc "stage-hc-as1-merchant-app-stage"          "/"                        
 # customer-dlc-app — KMP/Wasm web app served by server.js, same pattern as merchant-app.
 #   stage host 8284 -> container 8284 (stage-customer-dlc.rocketpay.co.in)
 create_hc "stage-hc-as1-customer-dlc-app-stage"      "/"                               8284
+# checkout-app — Next.js SSR frontend (payment_customer_app), migrated from AWS EC2.
+#   stage host 8285 -> container 8285 (checkout-staging.rocketpay.co.in / .udharpay.com)
+create_hc "stage-hc-as1-checkout-app-stage"          "/"                               8285
 # create_hc "stage-hc-as1-lending"                     "/lending/actuator/health"        8088
 create_hc "stage-hc-as1-crm"                         "/crm/"                           8087
 # create_hc "stage-hc-as1-ai-apps"                     "/support-agent/health"           3001
@@ -210,6 +214,7 @@ create_bs "stage-bs-as1-distributor-app"                 "stage-hc-as1-distribut
 create_bs "stage-bs-as1-merchant-app-prod"               "stage-hc-as1-merchant-app-prod"          "merchant-app-prod"
 create_bs "stage-bs-as1-merchant-app-stage"              "stage-hc-as1-merchant-app-stage"         "merchant-app-stage"
 create_bs "stage-bs-as1-customer-dlc-app-stage"          "stage-hc-as1-customer-dlc-app-stage"     "customer-dlc-app-stage"
+create_bs "stage-bs-as1-checkout-app-stage"               "stage-hc-as1-checkout-app-stage"         "checkout-app-stage"
 # create_bs "stage-bs-as1-lending"                         "stage-hc-as1-lending"                    "lending"
 create_bs "stage-bs-as1-crm"                             "stage-hc-as1-crm"                        "crm"
 # create_bs "stage-bs-as1-ai-apps"                         "stage-hc-as1-ai-apps"                    "ai-apps"
