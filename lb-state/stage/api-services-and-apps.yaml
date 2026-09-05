@@ -42,6 +42,9 @@ hostRules:
 - hosts:
   - checkout-staging.udharpay.com
   pathMatcher: checkout-app-paths
+- hosts:
+  - stage-crm.rocketpay.co.in
+  pathMatcher: crm-app-paths
 name: stage-lb-as1-api-services-and-apps
 pathMatchers:
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-distributor-app
@@ -54,6 +57,8 @@ pathMatchers:
   name: staging-payment-schedule-customer-paths
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-checkout-app-stage
   name: checkout-app-paths
+- defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-crm-app-stage
+  name: crm-app-paths
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: main-paths
   routeRules:

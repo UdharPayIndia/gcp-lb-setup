@@ -27,6 +27,7 @@ DOMAINS=(
   "staging-payment-schedule-customer.rocketpay.co.in"
   "checkout-staging.rocketpay.co.in"
   "checkout-staging.udharpay.com"
+  "stage-crm.rocketpay.co.in"
 )
 
 echo "=== Step 1: Create Certificate Map ==="
