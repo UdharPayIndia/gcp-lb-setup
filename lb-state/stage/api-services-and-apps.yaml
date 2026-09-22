@@ -314,6 +314,10 @@ pathMatchers:
     - prefixMatch: /fii-gateway/
     priority: 390
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-fii-gateway
+  - matchRules:
+    - prefixMatch: /workflow-service/
+    priority: 400
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-workflow-service
 - defaultService: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendBuckets/stage-bb-as1-default-503
   name: pg-paths
   pathRules:
