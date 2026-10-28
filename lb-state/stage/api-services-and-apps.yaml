@@ -188,6 +188,13 @@ pathMatchers:
         pathTemplateRewrite: /superkey/keys/v5/{id}/control/{control}/apply/{action}
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
   - matchRules:
+    - pathTemplateMatch: /superkey/keys/{id}/actions/{action}
+    priority: 70
+    routeAction:
+      urlRewrite:
+        pathTemplateRewrite: /superkey/keys/v5/{id}/actions/{action}
+    service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-superkey
+  - matchRules:
     - fullPathMatch: /account/v2/authenticate
     priority: 110
     service: https://www.googleapis.com/compute/v1/projects/rocketpay-gcp-setup/global/backendServices/stage-bs-as1-users-and-verifications
